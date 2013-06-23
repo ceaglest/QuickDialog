@@ -191,11 +191,11 @@
     }
 	
 	// Detect return
-	BOOL returnAllowed = YES;
 	BOOL returnDetected = allowChange && returnEnabled && [text isEqualToString:@"\n"];
 	
 	if (returnDetected)
 	{
+		BOOL returnAllowed = YES;
 		// Is the return allowed?
 		shouldAskDelegate = _entryElement && _entryElement.delegate && [_entryElement.delegate respondsToSelector:@selector(QEntryShouldReturnForElement:andCell:)];
 		
@@ -216,7 +216,7 @@
 		}
 	}
 		
-    return YES;
+    return allowChange;
 }
 
 // Todo: Return support
