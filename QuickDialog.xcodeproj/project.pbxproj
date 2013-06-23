@@ -52,6 +52,9 @@
 		B45EC56A1625E473007B96E2 /* QColorPickerElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B45EC5631625E473007B96E2 /* QColorPickerElement.m */; };
 		B45EC56E1625E473007B96E2 /* UIColor+ColorUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = B45EC5661625E473007B96E2 /* UIColor+ColorUtilities.h */; };
 		B45EC5701625E473007B96E2 /* UIColor+ColorUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B45EC5671625E473007B96E2 /* UIColor+ColorUtilities.m */; };
+		BF05A11217766F9F00BA019D /* QMultilineInlineElement.h in Headers */ = {isa = PBXBuildFile; fileRef = BF05A11017766F9E00BA019D /* QMultilineInlineElement.h */; };
+		BF05A11417766F9F00BA019D /* QMultilineInlineElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BF05A11117766F9F00BA019D /* QMultilineInlineElement.m */; };
+		BF05A117177674C000BA019D /* QMultilineEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF05A116177674BF00BA019D /* QMultilineEntryTableViewCell.m */; };
 		D80B0E3813E052DF00FA85CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80B0E3713E052DF00FA85CA /* UIKit.framework */; };
 		D80B0E3A13E052DF00FA85CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80B0E3913E052DF00FA85CA /* Foundation.framework */; };
 		D80B0E3C13E052DF00FA85CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80B0E3B13E052DF00FA85CA /* CoreGraphics.framework */; };
@@ -207,6 +210,10 @@
 		B45EC5631625E473007B96E2 /* QColorPickerElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QColorPickerElement.m; path = quickdialog/QColorPickerElement.m; sourceTree = SOURCE_ROOT; };
 		B45EC5661625E473007B96E2 /* UIColor+ColorUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ColorUtilities.h"; path = "quickdialog/UIColor+ColorUtilities.h"; sourceTree = SOURCE_ROOT; };
 		B45EC5671625E473007B96E2 /* UIColor+ColorUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ColorUtilities.m"; path = "quickdialog/UIColor+ColorUtilities.m"; sourceTree = SOURCE_ROOT; };
+		BF05A11017766F9E00BA019D /* QMultilineInlineElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QMultilineInlineElement.h; path = quickdialog/QMultilineInlineElement.h; sourceTree = SOURCE_ROOT; };
+		BF05A11117766F9F00BA019D /* QMultilineInlineElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QMultilineInlineElement.m; path = quickdialog/QMultilineInlineElement.m; sourceTree = SOURCE_ROOT; };
+		BF05A115177674BE00BA019D /* QMultilineEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QMultilineEntryTableViewCell.h; path = quickdialog/QMultilineEntryTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		BF05A116177674BF00BA019D /* QMultilineEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QMultilineEntryTableViewCell.m; path = quickdialog/QMultilineEntryTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		D80B0E3313E052DF00FA85CA /* QuickDialogExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickDialogExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80B0E3713E052DF00FA85CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D80B0E3913E052DF00FA85CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -607,6 +614,10 @@
 				D811F89F13EC905B00E3922B /* QMapViewController.m */,
 				D8B3944B151394E1008ECB34 /* QMultilineElement.h */,
 				D8B3944C151394E1008ECB34 /* QMultilineElement.m */,
+				BF05A11017766F9E00BA019D /* QMultilineInlineElement.h */,
+				BF05A11117766F9F00BA019D /* QMultilineInlineElement.m */,
+				BF05A115177674BE00BA019D /* QMultilineEntryTableViewCell.h */,
+				BF05A116177674BF00BA019D /* QMultilineEntryTableViewCell.m */,
 				D8B3944E151394E1008ECB34 /* QMultilineTextViewController.h */,
 				D8B3944F151394E1008ECB34 /* QMultilineTextViewController.m */,
 				F2F23A12152DD45100EB6685 /* QPickerElement */,
@@ -775,6 +786,7 @@
 				D8820B5116A246860070AE22 /* QCountdownElement.h in Headers */,
 				B45EC5681625E473007B96E2 /* QColorPickerElement.h in Headers */,
 				B45EC56E1625E473007B96E2 /* UIColor+ColorUtilities.h in Headers */,
+				BF05A11217766F9F00BA019D /* QMultilineInlineElement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,6 +956,7 @@
 				D8820C7E16A3543F0070AE22 /* QImageTableViewCell.m in Sources */,
 				B45EC56A1625E473007B96E2 /* QColorPickerElement.m in Sources */,
 				B45EC5701625E473007B96E2 /* UIColor+ColorUtilities.m in Sources */,
+				BF05A11417766F9F00BA019D /* QMultilineInlineElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,6 +973,7 @@
 				D811F90313EC907200E3922B /* ExampleViewController.m in Sources */,
 				D8F180E813F0599A009B0CAC /* JsonDataSampleController.m in Sources */,
 				F209CEE41536AB100043F61C /* PeriodPickerValueParser.m in Sources */,
+				BF05A117177674C000BA019D /* QMultilineEntryTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

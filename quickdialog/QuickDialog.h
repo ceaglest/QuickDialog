@@ -56,6 +56,7 @@
 #import "QSegmentedElement.h"
 #import "QMultilineTextViewController.h"
 #import "QMultilineElement.h"
+#import "QMultilineInlineElement.h"
 #import "QImageElement.h"
 #import "QColorPickerElement.h"
 #import "UIColor+ColorUtilities.h"
