@@ -10,6 +10,6 @@
 
 @interface QMultilineEntryTableViewCell : QEntryTableViewCell <UITextViewDelegate>
 
-@property(nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UITextView *textView;
 
 @end

@@ -162,9 +162,11 @@
     QEntryElement *entryElement = [[QEntryElement alloc] initWithTitle:@"Entry Element" Value:nil Placeholder:@"type here"];
 	entryElement.key = @"entry1";
 	
-	QMultilineInlineElement *multilineInlineElement = [[QMultilineInlineElement alloc] initWithTitle:@"Multi" value:@"type here"];
-	entryElement.key = @"entryM";
+	QMultilineInlineElement *multilineInlineElement = [[QMultilineInlineElement alloc] initWithTitle:@"Multi" value:@""];
+	multilineInlineElement.key = @"entryM";
 	multilineInlineElement.height = 90.0f;
+	multilineInlineElement.placeholder = @"Description";
+	multilineInlineElement.returnKeyType = UIReturnKeyNext;
 
     NSArray *values = [NSArray arrayWithObjects:@"Ferrari", @"Ms.",@"Mrs.",@"Miss",@"Mr.",@"Prof.",@"A/Prof.",nil];
     QAutoEntryElement *autoElement = [[QAutoEntryElement alloc] initWithTitle:@"AutoComplete" value:nil placeholder:@"type letter M"];

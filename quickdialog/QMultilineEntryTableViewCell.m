@@ -8,6 +8,12 @@
 
 #import "QMultilineEntryTableViewCell.h"
 
+@interface QMultilineEntryTableViewCell()
+
+- (void)updatePlaceholderForText:(NSString *)text;
+
+@end
+
 @implementation QMultilineEntryTableViewCell
 
 - (void)createSubviews {
@@ -61,6 +67,7 @@
     }
 	
     [self updatePrevNextStatus];
+	[self updatePlaceholderForText:_textView.text];
 }
 
 - (void)layoutSubviews {
@@ -73,6 +80,7 @@
     _textView.frame = [self calculateFrameForEntryElement];
 }
 
+// What is the entry position?
 - (CGRect)calculateFrameForEntryElement {
     CGFloat inset = 3;
 	return CGRectInset(self.contentView.bounds, inset, inset);
@@ -107,6 +115,15 @@
 //    return _entryElement.parentSection.entryPosition;
 }
 
+- (void)updatePlaceholderForText:(NSString *)text
+{
+	BOOL showPlaceholder = [text length] == 0;
+	
+	self.textView.textColor = showPlaceholder ? _entryElement.appearance.entryTextColorDisabled : _entryElement.appearance.entryTextColorEnabled;
+	if (showPlaceholder) {
+		self.textView.text = _entryElement.placeholder;
+	}
+}
 
 - (void)textFieldEditingChanged:(UITextField *)textFieldEditingChanged {
 	_entryElement.textValue = _textField.text;
@@ -126,6 +143,13 @@
 }
 
 #pragma mark - UITextView Delegate methods
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+	textView.text = _entryElement.textValue;
+	textView.textColor = _entryElement.appearance.entryTextColorEnabled;
+	return YES;
+}
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 50 * USEC_PER_SEC);
@@ -147,32 +171,57 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {
     _entryElement.textValue = textView.text;
     
-    if(_entryElement && _entryElement.delegate && [_entryElement.delegate respondsToSelector:@selector(QEntryDidEndEditingElement:andCell:)]){
+	[self updatePlaceholderForText:textView.text];
+	
+    if (_entryElement && _entryElement.delegate && [_entryElement.delegate respondsToSelector:@selector(QEntryDidEndEditingElement:andCell:)]) {
         [_entryElement.delegate QEntryDidEndEditingElement:_entryElement andCell:self];
     }
     
     [_entryElement performSelector:@selector(fieldDidEndEditing)];
 }
 
-// Todo: Detect return
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if(_entryElement && _entryElement.delegate && [_entryElement.delegate respondsToSelector:@selector(QEntryShouldChangeCharactersInRange:withString:forElement:andCell:)]){
-        return [_entryElement.delegate QEntryShouldChangeCharactersInRange:range withString:text forElement:_entryElement andCell:self];
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+	BOOL shouldAskDelegate = _entryElement && _entryElement.delegate && [_entryElement.delegate respondsToSelector:@selector(QEntryShouldChangeCharactersInRange:withString:forElement:andCell:)];
+	BOOL returnEnabled = self.textView.returnKeyType == UIReturnKeyDone || self.textView.returnKeyType == UIReturnKeyNext;
+	BOOL allowChange = YES;
+	
+	if (shouldAskDelegate) {
+        allowChange = [_entryElement.delegate QEntryShouldChangeCharactersInRange:range withString:text forElement:_entryElement andCell:self];
     }
+	
+	// Detect return
+	BOOL returnAllowed = YES;
+	BOOL returnDetected = allowChange && returnEnabled && [text isEqualToString:@"\n"];
+	
+	if (returnDetected)
+	{
+		// Is the return allowed?
+		shouldAskDelegate = _entryElement && _entryElement.delegate && [_entryElement.delegate respondsToSelector:@selector(QEntryShouldReturnForElement:andCell:)];
+		
+		if (shouldAskDelegate) {
+			returnAllowed = [_entryElement.delegate QEntryShouldReturnForElement:_entryElement andCell:self];
+		}
+		
+		if (returnAllowed) {
+			// Handle return
+			QEntryElement *element = [self findNextElementToFocusOn];
+			if ( element ) {
+				UITableViewCell *cell = [_quickformTableView cellForElement:element];
+				[cell becomeFirstResponder];
+			}
+			else {
+				[textView resignFirstResponder];
+			}
+		}
+	}
+		
     return YES;
 }
 
+// Todo: Return support
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	
-    QEntryElement *element = [self findNextElementToFocusOn];
-    if (element!=nil){
-        UITableViewCell *cell = [_quickformTableView cellForElement:element];
-        if (cell!=nil){
-            [cell becomeFirstResponder];
-        }
-    }  else {
-        [_textField resignFirstResponder];
-    }
     
     if(_entryElement && _entryElement.delegate && [_entryElement.delegate respondsToSelector:@selector(QEntryShouldReturnForElement:andCell:)]){
         return [_entryElement.delegate QEntryShouldReturnForElement:_entryElement andCell:self];
